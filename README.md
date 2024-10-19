@@ -30,3 +30,6 @@ This IoT project integrates a IR sensor onto a box with a lock that detect a IR 
 
 ## Flowchart
 ![A image to show flowchart of this project](flowchart.jpg)
+
+## Reference
+**https://maker.pro/raspberry-pi/projects/wand-controlled-horcrux-box**
