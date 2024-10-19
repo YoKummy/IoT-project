@@ -27,3 +27,6 @@ This IoT project integrates a IR sensor onto a box with a lock that detect a IR 
 2. **Processing Unit**: Raspberry Pi processes the video feed and runs the gesture recognition model.
 3. **Locking Mechanism**: Servo motor or solenoid to physically unlock the box upon valid gesture detection.
 4. **Power Supply**: Ensure reliable power for the system (e.g., a power bank or battery pack).
+
+## Flowchart
+<img src="https://drive.google.com/file/d/12E4vvuNnkRL0h4R0kRCv1kFjeHY3aCgR/view?usp=sharing" alt="A photo show flowchart of this project">
