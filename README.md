@@ -29,4 +29,4 @@ This IoT project integrates a IR sensor onto a box with a lock that detect a IR 
 4. **Power Supply**: Ensure reliable power for the system (e.g., a power bank or battery pack).
 
 ## Flowchart
-![A image to show flowchart of this project](/IoT-project/flowchart.png)
+![A image to show flowchart of this project](flowchart.png)
