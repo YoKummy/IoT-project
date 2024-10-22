@@ -1,6 +1,6 @@
 # IoT-project
 
-## Smart locker with laser ir sensor
+## Smart box with laser ir sensor
 
 ## Overview
 -**Project**: This IoT project integrates a IR sensor onto a box with a lock that detect a IR laser movement to unlock it.
