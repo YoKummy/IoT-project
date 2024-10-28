@@ -39,6 +39,7 @@ There's others that have done this before but none of them have implement using 
 ## Proposed methodologies
 A simple flowchart show how the magic box will operate
 ![A image to show flowchart of this project](flowchart.jpg)
+
 In order to achieve this flowchart, you will need a custom 3D printed box, a lock and a camera. For it to work, put ir camera in the front of the box, then use a pre train alphabet model to 
 do the gesture recognition, then connect the lock with camera, whenever camera detect a correct alphabet, the box will unlock itself, making this work.
 
