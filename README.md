@@ -1,48 +1,41 @@
 # IoT-project
 
-## Smart box with laser ir sensor
+## Wizard defender
 
 ## Overview
--**Project**: This IoT project integrates a IR sensor onto a box with a lock that detect a IR laser movement to unlock it.
+-**Project**: This is a mini game with interactive box where two players can compete with each other to see who is the better wizard. With internet you can even set the attributes of the game such as: Health, round, attack, and time...
 
--**Possible use case**: User can store their valuables or gold or idk what u would want to store in a private place u weirdo. By setting a passcode when the box initialize, and when someone without a ir laser wand, they will have no way to open the box except throw it on the ground and break it. However, if you, the owner, didn't bring the magic wand, you can also use your cellphone to connect to the box's ip and do a virtual unlock which require you to draw your password on your phone to unlock it.
+-**Possible use case**: Are you tired of scrolling through social media when you are bored in class? Are you tired of listening to teacher yapping about how important it is to remember that one single noun that you have to remember it and use it in test? Are you simply bored when sitting at your desk not knowing how to write that homework? Well you are in luck my friend! Today we will sell the brand new WIZARD DEFENDER for the price of low low $99.99!!! What did you say? "That's cheap!", Well hell yeah it is cheap! Come on down to your local gaming store and get your Super wizard defeender toy!!!!!! Yee haaa~ Howdy!
 
--**Project objectives**: In this project, you should be able to create a special box which contains a front facing ir camera and some servo motor to unlock the box. Also the box has to be connected to the Internet in order to use it when you don't have the magic wand or you want to let others open the box via Internet.
+-**Project objectives**: This project main goal is to provide a cool way to play with games. You can change the game attributes through internet connecting the box. And added a physical player model to give a better immersion.
 
 ## Features
 - **Gesture Recognition**: Detects specific hand or body gestures using the camera.
-- **Smart Lock System**: Unlocks the box when a valid gesture is recognized.
 - **Real-Time Detection**: Provides quick gesture response for user convenience.
-- **Security**: Supports only pre-configured gestures, providing an extra layer of security.
 
 ## Current survey
-There's others that have done this before but none of them have implement using internet to interact with the box, which is why I want to implement this feature into the project itself. And while I'm doing the survey, I found out that I' not that great in design mechanical parts. I might need some help with the mechanic part and also Machine learning part. I also want to implement teaching it how to learn new password in real time instead of feeding it large amount of sample size beforehand. 
+Maybe the game logic will be more complicated than the hardware side. The hardware side basically only needs a camera with some computation hardware to accelerate the calculation and some mechanic that enable the compress of spring and let go of the string. The problem might be how to load the spring and make sure it doesn't go off automatically and only go off when one side died. Also, the hardware might be a little be old so the reaction time might be slow leading the game not being fun to play. The casting spell is also a big problem because what if i want to add a bit complex character into it but the gesture recognition model doesn't know what is it. :/
 
 
 ## Technology Stack
 - **Hardware**: 
   - Raspberry Pi 4 or higher(for IoT functionality)
   - USB/PI Camera
-  - Servo motor or solenoid lock for the box
+  - Servo motor * 4?
+  - Some spring
 - **Software**:
   - Python (OpenCV for gesture recognition)
   - Machine Learning model for gesture detection (TensorFlow/Keras)
-  - MQTT (optional) for cloud communication
   - Flask/Node.js (optional) for web-based monitoring and control interface
 
 ## Components
 1. **Camera**: Captures real-time video of the user.
 2. **Processing Unit**: Raspberry Pi processes the video feed and runs the gesture recognition model.
-3. **Locking Mechanism**: Servo motor or solenoid to physically unlock the box upon valid gesture detection.
+3. **Eject Mechanism**: With the help of servo motor blocking the spring and releasing the spring to make the character eject when the game ends.
 4. **Power Supply**: Ensure reliable power for the system (e.g., a power bank or battery pack).
 
 ## Proposed methodologies
-A simple flowchart show how the magic box will operate
-![A image to show flowchart of this project](flowchart.jpg)
-
-In order to achieve this flowchart, you will need a custom 3D printed box, a lock and a camera. For it to work, put ir camera in the front of the box, then use a pre train alphabet model to 
-do the gesture recognition, then connect the lock with camera, whenever camera detect a correct alphabet, the box will unlock itself, making this work.
-
+User can start by connecting to the box to initialize the game, before starting, user can choose to play single player or multiplayer(2 people only). When the player is ready. They can start the game by pressing a pyhsical button on the box. The box will do a count down and start the round. There will be a attacker and a defender, defender needs to replicate attackers move, if defender cannot replicate attackers move, defender will lose health points, however, if defender successfully replicate attackers move, the role will change and move to the next round. Once health points go down to 0 or the timer count to 0 the game end. The spell should cast in a specific charachters. Once the battle end, the loser sides box will use spring to eject character meaning that they died.
 
 ## Reference
 **https://maker.pro/raspberry-pi/projects/wand-controlled-horcrux-box**
