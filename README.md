@@ -1,53 +1,130 @@
-# IoT-project
-
-## Wizard defender
+# IoT-Project: Math Defender
 
 ## Overview
--**Project**: This is a mini game with interactive box where two players can compete with each other to see who is the better wizard. With internet you can even set the attributes of the game such as: Health, round, attack, and time...
 
--**Possible use case**: Are you tired of scrolling through social media when you are bored in class? Are you tired of listening to teacher yapping about how important it is to remember that one single noun that you have to remember it and use it in test? Are you simply bored when sitting at your desk not knowing how to write that homework? 
+**Project**:  
+This is a single-player interactive game designed to help children and teenagers practice math skills in a fun and engaging way. Players solve math problems using physical buttons, and the game responds with real-time feedback. The system integrates IoT functionalities, allowing players or parents to customize the game settings through an online interface.
 
-Well you are in luck my friend! Today we will sell the brand new WIZARD DEFENDER for the price of low low $99.99!!! 
-  
-What did you say? "That's cheap!", Well hell yeah it is cheap! Come on down to your local gaming store and get your Super wizard defeender toy!!!!!! Yee haaa~ Howdy!
+**Possible Use Case**:  
 
--**Project objectives**: This project main goal is to provide a cool way to play with games. You can change the game attributes through internet connecting the box. And added a physical player model to give a better immersion.
+
+**Project Objectives**:  
+The main goal is to provide a hands-on, gamified approach to math practice. Players can adjust game difficulty, customize problem types, and compete against the clock to improve their skills.
+
+---
 
 ## Features
-- **Gesture Recognition**: Detects specific hand or body gestures using the camera.
-- **Real-Time Detection**: Provides quick gesture response for user convenience.
 
-## Current survey
-Maybe the game logic will be more complicated than the hardware side. The hardware side basically only needs a camera with some computation hardware to accelerate the calculation and some mechanic that enable the compress of spring and let go of the string. 
+- **Math Problem Generator**: Dynamic generation of addition, subtraction, multiplication, and division problems.
+- **Real-Time Input**: Physical buttons allow players to input answers quickly.
+- **IoT Customization**: Change game difficulty, timer settings, and problem types through an online interface.
+- **Progress Tracking**: Monitor player performance and improvement over time.
 
-The problem might be how to load the spring and make sure it doesn't go off automatically and only go off when one side died. Also, the hardware might be a little be old so the reaction time might be slow leading the game not being fun to play. The casting spell is also a big problem because what if i want to add a bit complex character into it but the gesture recognition model doesn't know what is it. :/
-
+---
 
 ## Technology Stack
-- **Hardware**: 
-  - Raspberry Pi 4 or higher(for IoT functionality)
-  - USB/PI Camera
-  - Servo motor * 4?
-  - Some spring
-- **Software**:
-  - Python (OpenCV for gesture recognition)
-  - Machine Learning model for gesture detection (TensorFlow/Keras)
-  - Flask/Node.js (optional) for web-based monitoring and control interface
+
+### Hardware
+- **Raspberry Pi 4 (or higher)**: Core processing unit.
+- **11 Push Buttons**: Number keys (1–9), decimal (`.`), and `Enter`.
+- **LCD Screen**: Displays math problems and feedback.
+- **Servo Motor + Spring Mechanism**: Ejects a toy or activates a reward system.
+- **Power Supply**: Reliable power through a battery pack or adapter.
+
+### Software
+- **Python**: Core programming language for logic and hardware interaction.
+  - **GPIO Zero**: To manage button inputs.
+  - **NumPy**: For random problem generation.
+- **Flask/Node.js** (optional): To build a web interface for IoT features.
+
+---
 
 ## Components
-1. **Camera**: Captures real-time video of the user.
-2. **Processing Unit**: Raspberry Pi processes the video feed and runs the gesture recognition model.
-3. **Eject Mechanism**: With the help of servo motor blocking the spring and releasing the spring to make the character eject when the game ends.
-4. **Power Supply**: Ensure reliable power for the system (e.g., a power bank or battery pack).
 
-## Proposed methodologies
-User can start by connecting to the box to initialize the game, before starting, user can choose to play single player or multiplayer(2 people only). When the player is ready. 
+1. **Input System**:  
+   - 11 physical buttons for number input and submission.
+   - Each button is wired to the GPIO pins of the Raspberry Pi.
+   
+2. **Output System**:  
+   - An LCD screen displays math problems and player responses.
+   - A spring-powered(or rubber band) eject system provides a visual reward for correct answers.
 
-They can start the game by pressing a pyhsical button on the box. The box will do a count down and start the round. There will be a attacker and a defender, defender needs to replicate attackers move, if defender cannot replicate attackers move, defender will lose health points, however, if defender successfully replicate attackers move, the role will change and move to the next round. 
+3. **Processing Unit**:  
+   - Raspberry Pi handles game logic, button presses, and displays the game state.
 
-Once health points go down to 0 or the timer count to 0 the game end. The spell should cast in a specific charachters. Once the battle end, the loser sides box will use spring to eject character meaning that they died.
+---
+
+## Game Flow
+
+1. **Startup**:  
+   - The player powers on the box and initializes the game.
+   - The system generates a math problem and displays it on the LCD screen.
+
+2. **Input**:  
+   - The player solves the problem and enters the answer using the number buttons.
+   - Press the `Enter` button to submit the answer.
+
+3. **Feedback**:  
+   - If the answer is correct, the system rewards the player by not ejecting player's model.
+   - If the answer is incorrect, the system displays the correct answer and deducts points, when points reachs zero, model ejected.
+
+4. **Rounds**:  
+   - The game progresses through a series of problems.
+   - Players can compete against a timer or solve as many problems as they can in a fixed time.
+
+---
+
+## Example Use Case
+
+1. **Problem**: The screen shows: `7 x 8 = ?`  
+2. **Player Input**:  
+   - Press buttons `5`, `6`, and `Enter` (56).  
+3. **Feedback**:  
+   - **Correct Answer**: The spring ejects a toy, and the next problem appears.  
+   - **Incorrect Answer**: The screen shows "Correct Answer: 56. Try Again!"  
+
+---
+
+## Proposed Methodologies
+
+1. **Problem Generator**:  
+   - Use Python to dynamically generate random math problems based on difficulty.  
+   - Example logic:  
+     easy: plus and minus
+     mid: multiply and division
+     hard: log and sqrt
+
+2. **IoT Integration**:  
+   - A web interface (using Flask or Node.js) to adjust game settings like difficulty and timers remotely.
+
+3. **Hardware Eject Mechanism**:  
+   - Use a rubber band-powered or traditional spring mechanism to eject a toy as a physical reward for correct answers.
+
+---
+
+## Hardware Wiring
+
+### Button Layout
+- 1–9: Numeric input.
+- `.`: For decimal answers.
+- `Enter`: Submit the answer.
+
+### Connections
+- Each button is connected to a GPIO pin on the Raspberry Pi with pull-down resistors.
+
+---
+
+## Optional Enhancements
+
+- **Data Logging**: Store player performance data (e.g., accuracy, speed) for progress tracking.
+- **Customization**: Allow users to choose specific math problem types (e.g., fractions, algebra).
+
+---
 
 ## Reference
-**https://maker.pro/raspberry-pi/projects/wand-controlled-horcrux-box**
+
+Eject system: https://www.youtube.com/watch?v=oa3bkelYmOw&t=197s
+
+---
 
 ## WIP

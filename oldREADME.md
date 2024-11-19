@@ -50,3 +50,17 @@ with round system to play mini game, maybe health system and timer and rounds ca
 **https://maker.pro/raspberry-pi/projects/wand-controlled-horcrux-box**
 
 ## WIP
+
+
+
+```python
+     import random
+
+     def generate_problem(level):
+         if level == "easy":
+             return random.randint(1, 10), "+", random.randint(1, 10)
+         elif level == "medium":
+             return random.randint(10, 50), "*", random.randint(1, 10)
+         else:
+             return random.randint(50, 100), "/", random.randint(1, 10)
+     ```
