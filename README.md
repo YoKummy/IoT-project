@@ -26,7 +26,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 ### Hardware
 - **Raspberry Pi 4 (or higher)**: Core processing unit.
-- **11 Push Buttons**: Number keys (1–9), decimal (`.`), and `Enter`.
+- **Numpad**: Number keys (1–9), decimal (`.`), and `Enter`.
 - **LCD Screen**: Displays math problems and feedback.
 - **Servo Motor + Spring Mechanism**: Ejects a toy or activates a reward system.
 - **Power Supply**: Reliable power through a battery pack or adapter.
@@ -42,8 +42,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 ## Components
 
 1. **Input System**:  
-   - 11 physical buttons for number input and submission.
-   - Each button is wired to the GPIO pins of the Raspberry Pi.
+   - numpad
    
 2. **Output System**:  
    - An LCD screen displays math problems and player responses.
@@ -118,6 +117,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 - **Data Logging**: Store player performance data (e.g., accuracy, speed) for progress tracking.
 - **Customization**: Allow users to choose specific math problem types (e.g., fractions, algebra).
+- **Multiplayer**: Allow two user to battle with each other with two sets of numpad.
 
 ---
 

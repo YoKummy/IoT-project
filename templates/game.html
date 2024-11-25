@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Defender</title>
+</head>
+<body>
+    <h1>Math Defender</h1>
+    <p>Score: {{ score }}</p>
+
+    <!-- Difficulty Selection Form -->
+    <form method="POST">
+        <label for="difficulty">Select Difficulty:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="easy" {% if difficulty == "easy" %}selected{% endif %}>Easy</option>
+            <option value="medium" {% if difficulty == "medium" %}selected{% endif %}>Medium</option>
+            <option value="hard" {% if difficulty == "hard" %}selected{% endif %}>Hard</option>
+        </select>
+        <button type="submit">Change Difficulty</button>
+    </form>
+
+    <p>Solve the math problem: {{ problem }}</p>
+
+    <form method="POST">
+        <label for="answer">Your answer: </label>
+        <input type="text" name="answer" id="answer" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
