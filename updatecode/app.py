@@ -3,7 +3,10 @@ import threading
 import drivers
 from time import sleep
 import RPi.GPIO as GPIO
+from flask import Flask, render_template
 
+# Initialize Flask app
+app = Flask(__name__)
 
 # Initialize LCD display
 display = drivers.Lcd()
@@ -17,7 +20,10 @@ servo.start(0)
 current_problem = None
 current_answer = None
 score = 6
+questions_answered = 0
 time_up = False
+game_over = False
+win = False
 
 def set_servo_angle(angle):
     """Set the servo motor to a specific angle (0-180 degrees)."""
@@ -50,7 +56,7 @@ def update_lcd(problem, score, time_left=None):
         display.lcd_display_string(f"Score: {score}", 2)
 
 def countdown_timer():
-    """Manages the 4-second countdown timer."""
+    """Manages the 5-second countdown timer."""
     global time_up
     time_left = 5  # Set the countdown duration
     while time_left > 0 and not time_up:  # Stop the timer early if answered
@@ -59,27 +65,44 @@ def countdown_timer():
         time_left -= 1
     if time_left == 0:
         time_up = True  # Signal that time is up
-        
 
 def check_score():
     """Checks if the game should end based on the score."""
-    global score
+    global score, game_over, win
     if score <= 0:
         set_servo_angle(180)
         display.lcd_clear()
         display.lcd_display_string("Game Over!", 1)
         display.lcd_display_string("Score: 0", 2)
         sleep(3)
-        raise SystemExit("Game Over! You lost.")
+        game_over = True
     elif score >= 12:
         display.lcd_clear()
         display.lcd_display_string("You Win!", 1)
         display.lcd_display_string("Score: 12", 2)
         sleep(3)
-        raise SystemExit("You Win! Congratulations.")
+        win = True
+
+@app.route('/')
+def home():
+    """Home page displaying player stats."""
+    global score, questions_answered, game_over, win
+    return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win)
+
+@app.route('/start_game')
+def start_game():
+    """Start the game by resetting variables."""
+    global score, questions_answered, game_over, win
+    score = 6
+    questions_answered = 0
+    game_over = False
+    win = False
+    threading.Thread(target=game_loop, daemon=True).start()
+    return "Game Started! <a href='/'>Go back</a>"
 
 # Main game loop
-try:
+def game_loop():
+    global current_problem, current_answer, score, questions_answered, time_up
     difficulty = "easy"  # Choose difficulty level
     set_servo_angle(0)
 
@@ -103,9 +126,11 @@ try:
             # Check the answer
             if user_answer == current_answer:
                 score += 1
+                questions_answered += 1
                 result = "Correct!"
             else:
                 score -= 2
+                questions_answered += 1
                 result = f"Incorrect! Correct:{current_answer}"
 
         except TimeoutError:
@@ -123,7 +148,12 @@ try:
         # Check if the game should end
         check_score()
 
-except KeyboardInterrupt:
-    # Cleanup on exit
-    display.lcd_clear()
-    print("Game Over")
+        if game_over or win:
+            break
+
+if __name__ == '__main__':
+    # Start the game in a separate thread
+    threading.Thread(target=game_loop, daemon=True).start()
+
+    # Start the Flask app
+    app.run(host='0.0.0.0', port=5000)

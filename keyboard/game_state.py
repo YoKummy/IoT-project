@@ -3,7 +3,7 @@ from threading import Lock
 
 class GameState:
     def __init__(self):
-        self.score = 10
+        self.score = 6
         self.attempts = 0
         self.correct = 0
         self.lock = Lock()
