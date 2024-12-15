@@ -40,6 +40,34 @@ def generate_problem(difficulty):
         operation = random.choice(["+", "-"])
         problem = f"{num1} {operation} {num2}"
         correct_answer = eval(problem)
+        
+    elif difficulty == "medium":
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        num3 = random.randint(1, 10)
+        operation1 = random.choice(["+", "-", "*"])
+        operation2 = random.choice(["+", "-", "*", "/"])
+        problem = f"{num1} {operation1} {num2} {operation2} {num3}"
+        correct_answer = eval(problem)
+
+    elif difficulty == "hard":
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 3)  # Keep exponent small
+        operation = random.choice(["+", "-", "*", "", "sqrt", "**"])
+
+        if operation == "sqrt":
+            num1 = random.randint(1, 10)
+            num1 = num1**2
+            problem = f"sqrt({num1})"
+            correct_answer = round(num1 ** 0.5, 2)
+        elif operation == "**":
+            problem = f"{num1} ** {num2}"
+            correct_answer = num1 ** num2
+        else:
+            num3 = 2#random.randint(1, 10)
+            operation2 = random.choice(["+", "-", "*", "/"])
+            problem = f"{num1}{operation}{num2}{operation2}{num3}"
+            correct_answer = eval(problem)
 
     if isinstance(correct_answer, float):
         correct_answer = round(correct_answer, 2)
@@ -49,11 +77,11 @@ def generate_problem(difficulty):
 def update_lcd(problem, score, time_left=None):
     """Updates the LCD display with the current problem, score, and optional timer."""
     display.lcd_clear()
-    display.lcd_display_string(f"Problem: {problem}", 1)
+    display.lcd_display_string(f"Problem:{problem}", 1)
     if time_left is not None:
-        display.lcd_display_string(f"Score: {score} Time: {time_left}s", 2)
+        display.lcd_display_string(f"Score:{score} Time:{time_left}s", 2)
     else:
-        display.lcd_display_string(f"Score: {score}", 2)
+        display.lcd_display_string(f"Score:{score}", 2)
 
 def countdown_timer():
     """Manages the 5-second countdown timer."""
