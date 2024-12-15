@@ -34,14 +34,14 @@ def set_servo_angle(angle):
 
 def generate_problem(difficulty):
     """Generates a random math problem based on the selected difficulty."""
-    if difficulty == "easy":
+    if difficulty == 1:
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
         operation = random.choice(["+", "-"])
         problem = f"{num1} {operation} {num2}"
         correct_answer = eval(problem)
         
-    elif difficulty == "medium":
+    elif difficulty == 2:
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
         num3 = random.randint(1, 10)
@@ -50,7 +50,7 @@ def generate_problem(difficulty):
         problem = f"{num1} {operation1} {num2} {operation2} {num3}"
         correct_answer = eval(problem)
 
-    elif difficulty == "hard":
+    elif difficulty == 3:
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 3)  # Keep exponent small
         operation = random.choice(["+", "-", "*", "", "sqrt", "**"])
@@ -131,7 +131,12 @@ def start_game():
 # Main game loop
 def game_loop():
     global current_problem, current_answer, score, questions_answered, time_up
-    difficulty = "easy"  # Choose difficulty level
+    difficulty = int(input("Enter difficulty: 1~3"))  # Choose difficulty level
+    display.lcd_clear()
+    display.lcd_display_string("Enter difficulty", 1)
+    display.lcd_display_string("Enter: " + str(difficulty), 2)
+    sleep(3)
+    display.lcd_clear()
     set_servo_angle(0)
 
     while True:
