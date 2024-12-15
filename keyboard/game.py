@@ -50,7 +50,7 @@ def update_lcd(problem, score, time_left=None):
         display.lcd_display_string(f"Score: {score}", 2)
 
 def countdown_timer():
-    """Manages the 4-second countdown timer."""
+    """Manages the 5-second countdown timer."""
     global time_up
     time_left = 5  # Set the countdown duration
     while time_left > 0 and not time_up:  # Stop the timer early if answered
