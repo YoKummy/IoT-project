@@ -38,7 +38,7 @@ def generate_problem(difficulty):
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
         operation = random.choice(["+", "-"])
-        problem = f"{num1} {operation} {num2}"
+        problem = f"{num1}{operation}{num2}"
         correct_answer = eval(problem)
         
     elif difficulty == 2:
@@ -47,7 +47,7 @@ def generate_problem(difficulty):
         num3 = random.randint(1, 10)
         operation1 = random.choice(["+", "-", "*"])
         operation2 = random.choice(["+", "-", "*", "/"])
-        problem = f"{num1} {operation1} {num2} {operation2} {num3}"
+        problem = f"{num1}{operation1}{num2}{operation2}{num3}"
         correct_answer = eval(problem)
 
     elif difficulty == 3:
@@ -61,7 +61,7 @@ def generate_problem(difficulty):
             problem = f"sqrt({num1})"
             correct_answer = round(num1 ** 0.5, 2)
         elif operation == "**":
-            problem = f"{num1} ** {num2}"
+            problem = f"{num1}**{num2}"
             correct_answer = num1 ** num2
         else:
             num3 = 2#random.randint(1, 10)
@@ -103,6 +103,7 @@ def check_score():
         display.lcd_display_string("Game Over!", 1)
         display.lcd_display_string("Score: 0", 2)
         sleep(3)
+        set_servo_angle(0)
         game_over = True
     elif score >= 12:
         display.lcd_clear()
@@ -134,7 +135,7 @@ def game_loop():
     difficulty = int(input("Enter difficulty: 1~3"))  # Choose difficulty level
     display.lcd_clear()
     display.lcd_display_string("Enter difficulty", 1)
-    display.lcd_display_string("Enter: " + str(difficulty), 2)
+    display.lcd_display_string("Enter:" + str(difficulty), 2)
     sleep(3)
     display.lcd_clear()
     set_servo_angle(0)
@@ -164,11 +165,11 @@ def game_loop():
             else:
                 score -= 2
                 questions_answered += 1
-                result = f"Incorrect! Correct:{current_answer}"
+                result = f"Wrong!Correct:{current_answer}"
 
         except TimeoutError:
             score -= 2
-            result = "Time's up! Score decreased!"
+            result = "Time's up!"
             time_up = True
 
         # Wait for the timer thread to finish (ensure clean exit)
