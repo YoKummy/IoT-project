@@ -3,7 +3,7 @@ import threading
 import drivers
 from time import sleep
 import RPi.GPIO as GPIO
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, render_template
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -24,10 +24,6 @@ questions_answered = 0
 time_up = False
 game_over = False
 win = False
-player_data = {
-    "name": "",
-    "difficulty": 1,
-}
 
 def set_servo_angle(angle):
     """Set the servo motor to a specific angle (0-180 degrees)."""
@@ -115,29 +111,13 @@ def check_score():
         display.lcd_display_string("Score: 12", 2)
         sleep(3)
         win = True
-'''
+
 @app.route('/')
 def home():
     """Home page displaying player stats."""
     global score, questions_answered, game_over, win
     return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win)
-'''
-@app.route('/')
-def home():
-    """Home page to enter player name and difficulty level."""
-    if request.method == 'POST':
-        name = request.form['name']
-        difficulty = int(request.form['difficulty'])
 
-        # Store the player data
-        player_data["name"] = name
-        player_data["difficulty"] = difficulty
-        
-        return redirect(url_for('start_game'))
-    
-    return render_template('index.html')
-
-'''
 @app.route('/start_game')
 def start_game():
     """Start the game by resetting variables."""
@@ -148,40 +128,17 @@ def start_game():
     win = False
     threading.Thread(target=game_loop, daemon=True).start()
     return "Game Started! <a href='/'>Go back</a>"
-'''
-
-@app.route('/start_game', methods=['POST'])
-def start_game():
-    """Start the game after submitting the name and difficulty."""
-    global score, questions_answered, game_over, win
-    score = 6
-    questions_answered = 0
-    game_over = False
-    win = False
-    
-    # Start the game in a new thread
-    threading.Thread(target=game_loop, daemon=True).start()
-    
-    return redirect(url_for('game_status'))  # Redirect to the game status page
-
-@app.route('/game_status')
-def game_status():
-    """Page displaying game status and player stats."""
-    return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win, player_name=player_data['name'])
-
-
 
 # Main game loop
 def game_loop():
     global current_problem, current_answer, score, questions_answered, time_up
-    #difficulty = int(input("Enter difficulty: 1~3"))  # Choose difficulty level
-    #display.lcd_clear()
-    #display.lcd_display_string("Enter difficulty", 1)
-    #display.lcd_display_string("Enter:" + str(difficulty), 2)
-    #sleep(3)
-    #display.lcd_clear()
+    difficulty = int(input("Enter difficulty: 1~3"))  # Choose difficulty level
+    display.lcd_clear()
+    display.lcd_display_string("Enter difficulty", 1)
+    display.lcd_display_string("Enter:" + str(difficulty), 2)
+    sleep(3)
+    display.lcd_clear()
     set_servo_angle(0)
-    difficulty = player_data['difficulty']
 
     while True:
         # Generate a new problem
