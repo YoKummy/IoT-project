@@ -122,7 +122,7 @@ def home():
     global score, questions_answered, game_over, win
     return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win)
 '''
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def home():
     """Home page to enter player name and difficulty level."""
     if request.method == 'POST':
@@ -150,19 +150,22 @@ def start_game():
     return "Game Started! <a href='/'>Go back</a>"
 '''
 
-@app.route('/start_game', methods=['POST'])
+@app.route('/start_game', methods=['GET','POST'])
 def start_game():
     """Start the game after submitting the name and difficulty."""
     global score, questions_answered, game_over, win
-    score = 6
-    questions_answered = 0
-    game_over = False
-    win = False
+    if request.method == 'POST':
+        score = 6
+        questions_answered = 0
+        game_over = False
+        win = False
+        
+        # Start the game in a new thread
+        threading.Thread(target=game_loop, daemon=True).start()
+        
+        # Redirect to the game status page
+        return redirect(url_for('game_status'))
     
-    # Start the game in a new thread
-    threading.Thread(target=game_loop, daemon=True).start()
-    
-    return redirect(url_for('game_status'))  # Redirect to the game status page
 
 @app.route('/game_status')
 def game_status():
