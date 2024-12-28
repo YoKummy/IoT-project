@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Status</title>
+    <title>Game Stats</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
         .game-over { color: red; font-size: 24px; }
@@ -12,18 +12,46 @@
     </style>
 </head>
 <body>
-    <h1>Game Status</h1>
-    <p>Player: {{ player_name }}</p>
+    <h1>Player Stats</h1>
+    
+    {% if not game_started %}
+    <!-- Form for entering name and selecting difficulty -->
+    <h2>Start a New Game</h2>
+    <form action="/start_game" method="POST">
+        <label for="name">Enter Your Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="difficulty">Choose Difficulty:</label>
+        <select id="difficulty" name="difficulty" required>
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+        </select><br><br>
+
+        <button type="submit">Start Game</button>
+    </form>
+    {% else %}
+    <!-- Display stats once game has started -->
     <p class="score">Score: {{ score }}</p>
     <p class="score">Questions Answered: {{ questions_answered }}</p>
+    <p class="score">Difficulty: 
+        {% if difficulty_level == 1 %}
+            Easy
+        {% elif difficulty_level == 2 %}
+            Medium
+        {% else %}
+            Hard
+        {% endif %}
+    </p>
 
     {% if game_over %}
         <p class="game-over">Game Over! Better luck next time!</p>
     {% elif win %}
         <p class="you-win">Congratulations! You won!</p>
     {% endif %}
-
     <br><br>
-    <a href="/">Start New Game</a>
+    <a href="/start_game">Start New Game</a>
+    {% endif %}
+    
 </body>
 </html>

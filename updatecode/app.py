@@ -1,9 +1,9 @@
+from flask import Flask, render_template, request
 import random
 import threading
 import drivers
 from time import sleep
 import RPi.GPIO as GPIO
-from flask import Flask, redirect, render_template, request, url_for
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -24,10 +24,8 @@ questions_answered = 0
 time_up = False
 game_over = False
 win = False
-player_data = {
-    "name": "",
-    "difficulty": 1,
-}
+player_name = ""  # Variable to store player's name
+difficulty_level = 1  # Default difficulty
 
 def set_servo_angle(angle):
     """Set the servo motor to a specific angle (0-180 degrees)."""
@@ -68,7 +66,7 @@ def generate_problem(difficulty):
             problem = f"{num1}**{num2}"
             correct_answer = num1 ** num2
         else:
-            num3 = 2#random.randint(1, 10)
+            num3 = 2  # random.randint(1, 10)
             operation2 = random.choice(["+", "-", "*", "/"])
             problem = f"{num1}{operation}{num2}{operation2}{num3}"
             correct_answer = eval(problem)
@@ -115,76 +113,38 @@ def check_score():
         display.lcd_display_string("Score: 12", 2)
         sleep(3)
         win = True
-'''
+
 @app.route('/')
 def home():
     """Home page displaying player stats."""
-    global score, questions_answered, game_over, win
-    return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win)
-'''
-@app.route('/', methods=['GET','POST'])
-def home():
-    """Home page to enter player name and difficulty level."""
-    if request.method == 'POST':
-        name = request.form['name']
-        difficulty = int(request.form['difficulty'])
+    global score, questions_answered, game_over, win, player_name
+    return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win, player_name=player_name)
 
-        # Store the player data
-        player_data["name"] = name
-        player_data["difficulty"] = difficulty
-        
-        return redirect(url_for('start_game'))
-    
-    return render_template('index.html')
-
-'''
-@app.route('/start_game')
+@app.route('/start_game', methods=['POST'])
 def start_game():
-    """Start the game by resetting variables."""
-    global score, questions_answered, game_over, win
+    """Start the game by resetting variables based on user input."""
+    global score, questions_answered, game_over, win, player_name, difficulty_level
+    player_name = request.form.get('name')  # Get the player's name from the form
+    difficulty_level = int(request.form.get('difficulty'))  # Get the difficulty level from the form
+    
     score = 6
     questions_answered = 0
     game_over = False
     win = False
+
     threading.Thread(target=game_loop, daemon=True).start()
-    return "Game Started! <a href='/'>Go back</a>"
-'''
-
-@app.route('/start_game', methods=['GET','POST'])
-def start_game():
-    """Start the game after submitting the name and difficulty."""
-    global score, questions_answered, game_over, win
-    if request.method == 'POST':
-        score = 6
-        questions_answered = 0
-        game_over = False
-        win = False
-        
-        # Start the game in a new thread
-        threading.Thread(target=game_loop, daemon=True).start()
-        
-        # Redirect to the game status page
-        return redirect(url_for('game_status'))
-    
-
-@app.route('/game_status')
-def game_status():
-    """Page displaying game status and player stats."""
-    return render_template('stats.html', score=score, questions_answered=questions_answered, game_over=game_over, win=win, player_name=player_data['name'])
-
-
+    return f"Game Started, {player_name}! <a href='/'>Go back</a>"
 
 # Main game loop
 def game_loop():
     global current_problem, current_answer, score, questions_answered, time_up
-    #difficulty = int(input("Enter difficulty: 1~3"))  # Choose difficulty level
-    #display.lcd_clear()
-    #display.lcd_display_string("Enter difficulty", 1)
-    #display.lcd_display_string("Enter:" + str(difficulty), 2)
-    #sleep(3)
-    #display.lcd_clear()
+    difficulty = difficulty_level  # Use the difficulty passed from the form
+    display.lcd_clear()
+    display.lcd_display_string(f"Hello, {player_name}", 1)
+    display.lcd_display_string(f"Difficulty:{difficulty}", 2)
+    sleep(3)
+    display.lcd_clear()
     set_servo_angle(0)
-    difficulty = player_data['difficulty']
 
     while True:
         # Generate a new problem
