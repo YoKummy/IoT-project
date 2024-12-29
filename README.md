@@ -17,8 +17,8 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 - **Math Problem Generator**: Dynamic generation of addition, subtraction, multiplication, and division problems.
 - **Real-Time Input**: Physical buttons allow players to input answers quickly.
-- **IoT Customization**: Change game difficulty, timer settings, and problem types through an online interface.
-- **Progress Tracking**: Monitor player performance and improvement over time.
+- **IoT Customization**: Change game difficulty, and problem types through an online interface.
+~~- Progress Tracking: Monitor player performance and improvement over time. Flask is a b*tch~~
 
 ---
 
@@ -28,14 +28,14 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 - **Raspberry Pi 4 (or higher)**: Core processing unit.
 - **Numpad**: Number keys (1–9), decimal (`.`), and `Enter`.
 - **LCD Screen**: Displays math problems and feedback.
-- **Servo Motor + Spring Mechanism**: Ejects a toy or activates a reward system.
+- **Servo Motor + Rubberband**: Ejects a toy or activates a reward system.
 - **Power Supply**: Reliable power through a battery pack or adapter.
 
 ### Software
 - **Python**: Core programming language for logic and hardware interaction.
-  - **GPIO Zero**: To manage button inputs.
-  - **NumPy**: For random problem generation.
+- **GPIO Zero**: To manage button inputs.
 - **Flask/Node.js** (optional): To build a web interface for IoT features.
+- **LCD Driver**: Included in the file.
 
 ---
 
@@ -46,10 +46,10 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
    
 2. **Output System**:  
    - An LCD screen displays math problems and player responses.
-   - A spring-powered(or rubber band) eject system provides a visual reward for correct answers.
+   - A spring-powered(or rubber band) eject system provides a visual punishment for correct answers.
 
 3. **Processing Unit**:  
-   - Raspberry Pi handles game logic, button presses, and displays the game state.
+   - Raspberry Pi 4B handles game logic, button presses, and displays the game state.
 
 ---
 
@@ -64,8 +64,8 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
    - Press the `Enter` button to submit the answer.
 
 3. **Feedback**:  
-   - If the answer is correct, the system rewards the player by not ejecting player's model.
-   - If the answer is incorrect, the system displays the correct answer and deducts points, when points reachs zero, model ejected.
+   - If the answer is correct, the system rewards the player by not ejecting player's model and plus 1.
+   - If the answer is incorrect, the system deducts points, when points reachs zero, model ejected.
 
 4. **Rounds**:  
    - The game progresses through a series of problems.
@@ -79,8 +79,8 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 2. **Player Input**:  
    - Press buttons `5`, `6`, and `Enter` (56).  
 3. **Feedback**:  
-   - **Correct Answer**: The spring ejects a toy, and the next problem appears.  
-   - **Incorrect Answer**: The screen shows "Correct Answer: 56. Try Again!"  
+   - **Correct Answer**: The lcd displays next problem and plus score.
+   - **Incorrect Answer**: The screen ~~shows "Correct Answer: 56. Try Again!" ONLY IF I HAVE A BIGGER LCD~~ display "Wrong" and deduct points.  
 
 ---
 
@@ -94,7 +94,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
      hard: log and sqrt
 
 2. **IoT Integration**:  
-   - A web interface (using Flask or Node.js) to adjust game settings like difficulty and timers remotely.
+   - A web interface (using Flask or Node.js) to adjust game settings like difficulty remotely.
 
 3. **Hardware Eject Mechanism**:  
    - Use a rubber band-powered or traditional spring mechanism to eject a toy as a physical reward for correct answers.
@@ -122,13 +122,19 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 ![Alt text](images/IMG_2341.jpg)
 ### Put your whole component into it
 ![Alt text](images/IMG_2342.jpg)
+I put the lcd on front and carve a hole to hold it.
 ![Alt text](images/IMG_2343.jpg)
+And I also carve a hole on the back to let the power cable go through.
 ![Alt text](images/IMG_2344.jpg)
+I use 3 chapsticks to hold the rubberband cuz other things are either too short or too fragile.
 ![Alt text](images/IMG_2345.jpg)
+Last carve a hole on the back and seated the Servo so when it connects to the rubberband it doesn't move around.
 
 ### Profit???
 ![Alt text](images/IMG_2347.png)
+Enter the name and difficulty.
 ![Alt text](images/IMG_2348.jpg)
+The lcd display the information after enter the variable.
 
 
 ## Optional Enhancements
@@ -144,7 +150,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 ## Reference
 
 Eject system: https://www.youtube.com/watch?v=oa3bkelYmOw&t=197s
-
+Lcd driver and tutorial: https://youtu.be/3XLjVChVgec?si=pfhjOG6D5fRk9OT9
 ---
 
 ## WIP
