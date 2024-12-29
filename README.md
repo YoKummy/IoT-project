@@ -127,7 +127,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 ![Alt text](images/IMG_2345.jpg)
 
 ### Profit???
-![Alt text](images/IMG_2347.jpg)
+![Alt text](images/IMG_2347.png)
 ![Alt text](images/IMG_2348.jpg)
 
 
