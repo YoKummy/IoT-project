@@ -57,6 +57,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 1. **Startup**:  
    - The player powers on the box and initializes the game.
+   - However, it still require player to manually start the game through terminal. Due to the need to connect to wifi first then start the game(Flask).
    - The system generates a math problem and displays it on the LCD screen.
 
 2. **Input**:  
@@ -65,7 +66,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 3. **Feedback**:  
    - If the answer is correct, the system rewards the player by not ejecting player's model and plus 1.
-   - If the answer is incorrect, the system deducts points, when points reachs zero, model ejected.
+   - If the answer is incorrect, the system deducts 2 points, when points reachs zero, model ejected.
 
 4. **Rounds**:  
    - The game progresses through a series of problems.
@@ -118,6 +119,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 ### FIRST! You need a box and some component
 ![Alt text](images/IMG_2330.jpg)
+Bread board is optional if you want to add some button or led or other component.
 ### Boom, box finished!
 ![Alt text](images/IMG_2341.jpg)
 ### Put your whole component into it
