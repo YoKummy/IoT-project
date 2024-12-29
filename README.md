@@ -104,20 +104,40 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 ## Hardware Wiring
 
 ### Button Layout
-- 1–9: Numeric input.
+- 0–9: Numeric input.
 - `.`: For decimal answers.
 - `Enter`: Submit the answer.
+- `Delete`: For delete input.
 
 ### Connections
-- Each button is connected to a GPIO pin on the Raspberry Pi with pull-down resistors.
+- Numpad is connected via USB port.
+- Connect LCD to Raspberry pi via wire?
+- Connect Servo to Raspberry pi?
 
----
+## Step by step
+
+### FIRST! You need a box and some component
+![Alt text](images/IMG_2330.jpg)
+### Boom, box finished!
+![Alt text](images/IMG_2341.jpg)
+### Put your whole component into it
+![Alt text](images/IMG_2342.jpg)
+![Alt text](images/IMG_2343.jpg)
+![Alt text](images/IMG_2344.jpg)
+![Alt text](images/IMG_2345.jpg)
+
+### Profit???
+![Alt text](images/IMG_2347.jpg)
+![Alt text](images/IMG_2348.jpg)
+
 
 ## Optional Enhancements
 
 - **Data Logging**: Store player performance data (e.g., accuracy, speed) for progress tracking.
 - **Customization**: Allow users to choose specific math problem types (e.g., fractions, algebra).
 - **Multiplayer**: Allow two user to battle with each other with two sets of numpad.
+
+![Alt text](images/IMG_2331.jpg)
 
 ---
 
