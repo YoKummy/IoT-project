@@ -117,12 +117,12 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
 
 ## Step by step
 
-### FIRST! You need a box and some component
+### STEP 1! You need a box and some component
 ![Alt text](images/IMG_2330.jpg)
-Bread board is optional if you want to add some button or led or other component.
-### Boom, box finished!
+Bread board is optional, you can add some buttons, leds or other component.
+### STEP 2! Boom, box finished!
 ![Alt text](images/IMG_2341.jpg)
-### Put your whole component into it
+### STEP 3! Put your whole component into it
 ![Alt text](images/IMG_2342.jpg)
 I put the lcd on front and carve a hole to hold it.
 ![Alt text](images/IMG_2343.jpg)
@@ -132,7 +132,7 @@ I use 3 chapsticks to hold the rubberband cuz other things are either too short 
 ![Alt text](images/IMG_2345.jpg)
 Last carve a hole on the back and seated the Servo so when it connects to the rubberband it doesn't move around.
 
-### Profit???
+### STEP 4! Profit???
 ![Alt text](images/IMG_2347.png)
 Enter the name and difficulty.
 ![Alt text](images/IMG_2348.jpg)
