@@ -81,7 +81,7 @@ The main goal is to provide a hands-on, gamified approach to math practice. Play
    - Press buttons `5`, `6`, and `Enter` (56).  
 3. **Feedback**:  
    - **Correct Answer**: The lcd displays next problem and plus score.
-   - **Incorrect Answer**: The screen ~~shows "Correct Answer: 56. Try Again!" ONLY IF I HAVE A BIGGER LCD~~ display "Wrong" and deduct points.  
+   - **Incorrect Answer**: The screen ~~shows "Correct Answer: 56. Try Again!" ONLY IF I HAVE A BIGGER LCD~~ displays "Wrong" and deduct points.  
 
 ---
 
